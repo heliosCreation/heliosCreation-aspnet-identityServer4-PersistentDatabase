@@ -14,16 +14,7 @@ namespace IdentityServer.DbContexts.Configurations
             builder.HasData(GenerateClaimSeeds());
         }
 
-        //Claims = new List<Claim>
-        //                {
-        //                    new Claim(JwtClaimTypes.GivenName, "Quentin"),
-        //                    new Claim(JwtClaimTypes.FamilyName, "Couissinier"),
-        //                    new Claim(JwtClaimTypes.Email, "quentin.couissinier@email.com"),
-        //                    new Claim(JwtClaimTypes.EmailVerified, "true", ClaimValueTypes.Boolean),
-        //                    new Claim(JwtClaimTypes.Address, JsonSerializer.Serialize(address), IdentityServerConstants.ClaimValueTypes.Json),
-        //                    new Claim(JwtClaimTypes.Role, "admin")
 
-        //                }
     private List<UserClaim> GenerateClaimSeeds()
         {
             return new List<UserClaim>()
@@ -46,7 +37,7 @@ namespace IdentityServer.DbContexts.Configurations
                 new UserClaim()
                 {
                     Id = Guid.NewGuid(),
-                    UserId = new Guid("c6e8040f-b2c0-4986-af6c-d3b650e0927e"),
+                    UserId = new Guid("13229d33-99e0-41b3-b18d-4f72127e3971"),
                     Type = JwtClaimTypes.Role,
                     Value = "user"
                 },
@@ -72,6 +63,13 @@ namespace IdentityServer.DbContexts.Configurations
                     UserId = new Guid("c6e8040f-b2c0-4986-af6c-d3b650e0927e"),
                     Type = JwtClaimTypes.Role,
                     Value = "admin"
+                },
+                new UserClaim()
+                {
+                    Id = Guid.NewGuid(),
+                    UserId = new Guid("c6e8040f-b2c0-4986-af6c-d3b650e0927e"),
+                    Type = JwtClaimTypes.Role,
+                    Value = "user"
                 },
             };
         }

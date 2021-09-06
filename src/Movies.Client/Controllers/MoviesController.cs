@@ -20,7 +20,7 @@ namespace Movies.Client.Controllers
             _movieApiService = movieApiService;
         }
 
-        [Authorize(Roles = "admin")]
+        //[Authorize(Roles = "admin")]
         public async Task<IActionResult> AdminOnly()
         {
             var userInfo = await _movieApiService.GetUserInfo();

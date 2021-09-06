@@ -47,7 +47,15 @@ namespace Movies.Client.ApiService
             var userInfoDictionnary = new Dictionary<string, string>();
             foreach (var claim in userInfo.Claims)
             {
-                userInfoDictionnary.Add(claim.Type, claim.Value);
+                if (userInfoDictionnary.ContainsKey(claim.Type))
+                {
+                    userInfoDictionnary[claim.Type] = $"{userInfoDictionnary[claim.Type]} , {claim.Value}";
+                }
+                else
+                {
+                    userInfoDictionnary.Add(claim.Type, claim.Value);
+                }
+
             }
 
             return new UserInfoViewModel(userInfoDictionnary);

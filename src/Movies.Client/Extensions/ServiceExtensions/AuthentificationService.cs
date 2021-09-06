@@ -1,4 +1,5 @@
 ﻿using IdentityModel;
+using Microsoft.AspNetCore.Authentication.OAuth.Claims;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
@@ -47,14 +48,14 @@ namespace Movies.Client.Extensions.ServiceExtensions
                 //Some claims are filtered by the middleware pipeline. With this command, we remove the filter.
                 //opt.ClaimActions.Remove("nbf");
                 //Some claims might also not be wanted. With this method, we remove them from the claim Identity. Thus, making the cookie lighter.
-                opt.ClaimActions.DeleteClaims("sid", "idp", "s_hash", "auth_time");
-                opt.ClaimActions.MapUniqueJsonKey("role", "role");
+                opt.ClaimActions.MapAllExcept("sid", "idp", "s_hash", "auth_time");
+                opt.ClaimActions.MapJsonKey("role", "role");
 
                 //Token should posesses those values
                 opt.TokenValidationParameters = new TokenValidationParameters
                 {
-                    NameClaimType = JwtClaimTypes.GivenName,
-                    RoleClaimType = JwtClaimTypes.Role
+                    NameClaimType = "name",
+                    RoleClaimType = "role"
                 };
             });
 

@@ -24,7 +24,7 @@ namespace IdentityServer.Services
             var subjectId = context.Subject.GetSubjectId();
             var claimsForUser = (await _localUserService.GetUserClaimsBySubjectAsync(subjectId))
                 .ToList();
-
+            context.IssuedClaims.Clear();
             context.AddRequestedClaims(
                 claimsForUser.Select(c => new Claim(c.Type, c.Value)).ToList());
         }
