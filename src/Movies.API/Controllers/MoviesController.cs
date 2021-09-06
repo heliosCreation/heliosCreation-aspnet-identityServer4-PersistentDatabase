@@ -29,6 +29,8 @@ namespace Movies.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Movie>>> GetMovie()
         {
+            var x = _user.getUserId();
+
             return Ok( (await _context.Movie.ToListAsync()).Where(m => m.OwnerId == _user.getUserId()));
         }
 
@@ -36,6 +38,7 @@ namespace Movies.API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Movie>> GetMovie(Guid id)
         {
+
             var movie = await _context.Movie.FirstOrDefaultAsync(m => m.Id == id &&  m.OwnerId == _user.getUserId());
 
             if (movie == null)

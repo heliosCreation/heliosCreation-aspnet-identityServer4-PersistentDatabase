@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace IdentityServer.Migrations
 {
-    public partial class InitUserandUserClaimsTable : Migration
+    public partial class InitUserandUserClaimstables : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -47,28 +47,24 @@ namespace IdentityServer.Migrations
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "ConcurrencyStamp", "IsActive", "Password", "Subject", "Username" },
-                values: new object[] { new Guid("13229d33-99e0-41b3-b18d-4f72127e3971"), "3425734c-5485-4958-b3a2-6ff289f87e46", true, "password", "d860efca-22d9-47fd-8249-791ba61b07c7", "Frank" });
+                values: new object[] { new Guid("13229d33-99e0-41b3-b18d-4f72127e3971"), "66745274-4272-4d5f-9b9b-9a92f4eddf58", true, "password", "d860efca-22d9-47fd-8249-791ba61b07c7", "Frank" });
 
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "ConcurrencyStamp", "IsActive", "Password", "Subject", "Username" },
-                values: new object[] { new Guid("96053525-f4a5-47ee-855e-0ea77fa6c55a"), "b9bcbbb1-50d1-4d20-9fa8-0eb9c79f5fff", true, "password", "b7539694-97e7-4dfe-84da-b4256e1ff5c7", "Claire" });
+                values: new object[] { new Guid("c6e8040f-b2c0-4986-af6c-d3b650e0927e"), "dfda2645-dc43-4ffa-bc0f-679fb2c9efad", true, "Helios", "5BE86359-073C-434B-AD2D-A3932222DABE", "Quentin" });
 
             migrationBuilder.InsertData(
                 table: "UserClaims",
                 columns: new[] { "Id", "ConcurrencyStamp", "Type", "UserId", "Value" },
                 values: new object[,]
                 {
-                    { new Guid("8c4fcea0-102a-4da9-aa08-1b6a1afc7ad9"), "990557bc-fcd3-4859-a006-665c6c9d4559", "given_name", new Guid("13229d33-99e0-41b3-b18d-4f72127e3971"), "Frank" },
-                    { new Guid("a5d98106-b3ac-43b0-bdf7-c7c6a889239b"), "e760492f-c3f5-4ad2-a325-7f79746230c7", "family_name", new Guid("13229d33-99e0-41b3-b18d-4f72127e3971"), "Underwood" },
-                    { new Guid("38e482eb-7a9e-4e05-87a2-e661dba075cb"), "da9efaf2-8b9c-468c-b1bf-80918805b012", "address", new Guid("13229d33-99e0-41b3-b18d-4f72127e3971"), "Main Road 1" },
-                    { new Guid("0ac3ee14-1e7c-4e80-ac34-646f1791c36e"), "87a9b4ee-e6dd-4f58-a9f4-daf0b579203a", "subscriptionlevel", new Guid("13229d33-99e0-41b3-b18d-4f72127e3971"), "FreeUser" },
-                    { new Guid("c9782fc2-ed78-4f05-8857-be53613287f8"), "5add7373-2b21-4379-9eb8-491cc3d2ca82", "country", new Guid("13229d33-99e0-41b3-b18d-4f72127e3971"), "nl" },
-                    { new Guid("a4854229-f6d1-4a39-8897-beed0af9a282"), "16881204-b8cd-4cc5-8940-d80dc1fdc4f7", "given_name", new Guid("96053525-f4a5-47ee-855e-0ea77fa6c55a"), "Claire" },
-                    { new Guid("48c90ea2-2721-4e8a-9894-5ad735a722be"), "b1b04174-1ed0-4eb2-a9f4-d870df149387", "family_name", new Guid("96053525-f4a5-47ee-855e-0ea77fa6c55a"), "Underwood" },
-                    { new Guid("4e8fd0fd-7ddd-4559-a897-14506a517a07"), "bd891933-3489-4c11-b51d-fb64496e9eba", "address", new Guid("96053525-f4a5-47ee-855e-0ea77fa6c55a"), "Big Street 2" },
-                    { new Guid("18e1718f-20ff-4672-b018-368663f51434"), "ba662c58-3290-475b-a770-372e2acc229a", "subscriptionlevel", new Guid("96053525-f4a5-47ee-855e-0ea77fa6c55a"), "PayingUser" },
-                    { new Guid("b9c951d0-c21d-4910-a7c4-be9f224e1aa9"), "ce012372-7de4-4215-9716-fd19ecbae012", "country", new Guid("96053525-f4a5-47ee-855e-0ea77fa6c55a"), "be" }
+                    { new Guid("f0f10949-dbd7-49fb-9614-2881dbb6611b"), "4d424141-4766-4b62-be36-5cb92fab3c05", "given_name", new Guid("13229d33-99e0-41b3-b18d-4f72127e3971"), "Frank" },
+                    { new Guid("c8d716d5-3ab5-4d14-94e8-173fa30d6dc3"), "1457a3cd-a5ce-424a-9f77-79e12eff6360", "family_name", new Guid("13229d33-99e0-41b3-b18d-4f72127e3971"), "Underwood" },
+                    { new Guid("7da35239-7000-45e0-a216-984b3a8e7d33"), "9a81ddb1-bbd2-4e11-9d7d-378465947daa", "role", new Guid("c6e8040f-b2c0-4986-af6c-d3b650e0927e"), "user" },
+                    { new Guid("6c155ffc-1782-4971-8e2e-cf020bfe4800"), "6d06df59-f764-4051-b78f-7afb55636941", "given_name", new Guid("c6e8040f-b2c0-4986-af6c-d3b650e0927e"), "Quentin" },
+                    { new Guid("7228b0b1-4b68-4183-9b2f-13bf8f0a7a64"), "97f5f6eb-2923-4218-bb9c-224f00c313d1", "family_name", new Guid("c6e8040f-b2c0-4986-af6c-d3b650e0927e"), "Couissinier" },
+                    { new Guid("6e23de7a-0b76-4ed7-a7c5-53bd93154f2d"), "35931318-e740-4f35-b395-134e36b91ef7", "role", new Guid("c6e8040f-b2c0-4986-af6c-d3b650e0927e"), "admin" }
                 });
 
             migrationBuilder.CreateIndex(

@@ -1,4 +1,5 @@
-﻿using IdentityServer.Entities;
+﻿using IdentityModel;
+using IdentityServer.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -13,81 +14,65 @@ namespace IdentityServer.DbContexts.Configurations
             builder.HasData(GenerateClaimSeeds());
         }
 
+        //Claims = new List<Claim>
+        //                {
+        //                    new Claim(JwtClaimTypes.GivenName, "Quentin"),
+        //                    new Claim(JwtClaimTypes.FamilyName, "Couissinier"),
+        //                    new Claim(JwtClaimTypes.Email, "quentin.couissinier@email.com"),
+        //                    new Claim(JwtClaimTypes.EmailVerified, "true", ClaimValueTypes.Boolean),
+        //                    new Claim(JwtClaimTypes.Address, JsonSerializer.Serialize(address), IdentityServerConstants.ClaimValueTypes.Json),
+        //                    new Claim(JwtClaimTypes.Role, "admin")
 
-        private List<UserClaim> GenerateClaimSeeds()
+        //                }
+    private List<UserClaim> GenerateClaimSeeds()
         {
             return new List<UserClaim>()
             {
+                //Frank's Claims
                 new UserClaim()
                 {
                      Id = Guid.NewGuid(),
                      UserId = new Guid("13229d33-99e0-41b3-b18d-4f72127e3971"),
-                     Type = "given_name",
+                     Type = JwtClaimTypes.GivenName,
                      Value = "Frank"
                 },
                 new UserClaim()
                 {
                      Id = Guid.NewGuid(),
                      UserId = new Guid("13229d33-99e0-41b3-b18d-4f72127e3971"),
-                     Type = "family_name",
+                     Type = JwtClaimTypes.FamilyName,
                      Value = "Underwood"
                 },
                 new UserClaim()
                 {
                     Id = Guid.NewGuid(),
-                    UserId = new Guid("13229d33-99e0-41b3-b18d-4f72127e3971"),
-                    Type = "address",
-                    Value = "Main Road 1"
+                    UserId = new Guid("c6e8040f-b2c0-4986-af6c-d3b650e0927e"),
+                    Type = JwtClaimTypes.Role,
+                    Value = "user"
+                },
+
+                //Quentin's Claims
+                new UserClaim()
+                {
+                    Id = Guid.NewGuid(),
+                    UserId = new Guid("c6e8040f-b2c0-4986-af6c-d3b650e0927e"),
+                    Type = JwtClaimTypes.GivenName,
+                    Value = "Quentin"
                 },
                 new UserClaim()
                 {
                     Id = Guid.NewGuid(),
-                    UserId = new Guid("13229d33-99e0-41b3-b18d-4f72127e3971"),
-                    Type = "subscriptionlevel",
-                    Value = "FreeUser"
+                    UserId = new Guid("c6e8040f-b2c0-4986-af6c-d3b650e0927e"),
+                    Type = JwtClaimTypes.FamilyName,
+                    Value = "Couissinier"
                 },
                 new UserClaim()
                 {
                     Id = Guid.NewGuid(),
-                    UserId = new Guid("13229d33-99e0-41b3-b18d-4f72127e3971"),
-                    Type = "country",
-                    Value = "nl"
+                    UserId = new Guid("c6e8040f-b2c0-4986-af6c-d3b650e0927e"),
+                    Type = JwtClaimTypes.Role,
+                    Value = "admin"
                 },
-                new UserClaim()
-                {
-                    Id = Guid.NewGuid(),
-                    UserId = new Guid("96053525-f4a5-47ee-855e-0ea77fa6c55a"),
-                    Type = "given_name",
-                    Value = "Claire"
-                },
-                new UserClaim()
-                {
-                    Id = Guid.NewGuid(),
-                    UserId = new Guid("96053525-f4a5-47ee-855e-0ea77fa6c55a"),
-                    Type = "family_name",
-                    Value = "Underwood"
-                },
-                new UserClaim()
-                {
-                    Id = Guid.NewGuid(),
-                    UserId = new Guid("96053525-f4a5-47ee-855e-0ea77fa6c55a"),
-                    Type = "address",
-                    Value = "Big Street 2"
-                },
-                new UserClaim()
-                {
-                    Id = Guid.NewGuid(),
-                    UserId = new Guid("96053525-f4a5-47ee-855e-0ea77fa6c55a"),
-                    Type = "subscriptionlevel",
-                    Value = "PayingUser"
-                },
-                new UserClaim()
-                {
-                    Id = Guid.NewGuid(),
-                    UserId = new Guid("96053525-f4a5-47ee-855e-0ea77fa6c55a"),
-                    Type = "country",
-                    Value = "be"
-                }
             };
         }
     }

@@ -1,4 +1,5 @@
 using IdentityServer.Extensions.Services;
+using IdentityServer.Services;
 using IdentityServer4.Test;
 using IdentityServerHost.Quickstart.UI;
 using Microsoft.AspNetCore.Builder;
@@ -28,12 +29,17 @@ namespace IdentityServer
 
             services.AddUserSqlDbContext(Configuration["ConnectionString:UserDb"]);
 
-            services.AddIdentityServer()
+            services.AddScoped<ILocalUserService, LocalUserService>();
+
+
+            var builder = services.AddIdentityServer()
                 .AddInMemoryClients(Config.Clients)
                 .AddInMemoryApiScopes(Config.ApiScopes)
                 .AddInMemoryIdentityResources(Config.IdentityResources)
-                .AddTestUsers(TestUsers.Users)
-                .AddDeveloperSigningCredential();
+                .AddInMemoryApiResources(Config.ApiResources)
+                .AddDeveloperSigningCredential();;
+
+            builder.AddProfileService<LocalUserProfileService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

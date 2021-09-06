@@ -27,12 +27,12 @@ namespace IdentityServer.DbContexts.Configurations
                     Username = "Frank",
                     IsActive = true
                 },
-                new User()
+                new User
                 {
-                    Id = new Guid("96053525-f4a5-47ee-855e-0ea77fa6c55a"),
-                    Password = "password",
-                    Subject = "b7539694-97e7-4dfe-84da-b4256e1ff5c7",
-                    Username = "Claire",
+                    Id = new Guid("c6e8040f-b2c0-4986-af6c-d3b650e0927e"),
+                    Subject = "5BE86359-073C-434B-AD2D-A3932222DABE",
+                    Username = "Quentin",
+                    Password = "Helios",
                     IsActive = true
                 });
         }

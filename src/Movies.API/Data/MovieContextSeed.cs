@@ -71,7 +71,7 @@ namespace Movies.API.Data
                         Rating = "8.9",
                         ImageUrl = "images/src",
                         ReleaseDate = new DateTime(1993, 5, 5),
-                        OwnerId = "88421113"
+                        OwnerId = "5BE86359-073C-434B-AD2D-A3932222DABE"
                     },
                     new Movie
                     {
@@ -81,7 +81,7 @@ namespace Movies.API.Data
                         Rating = "8.9",
                         ImageUrl = "images/src",
                         ReleaseDate = new DateTime(1994, 5, 5),
-                        OwnerId = "88421113"
+                        OwnerId = "d860efca-22d9-47fd-8249-791ba61b07c7"
                     },
                     new Movie
                     {
@@ -91,7 +91,7 @@ namespace Movies.API.Data
                         Rating = "8.8",
                         ImageUrl = "images/src",
                         ReleaseDate = new DateTime(1999, 5, 5),
-                        OwnerId = "88421113"
+                        OwnerId = "d860efca-22d9-47fd-8249-791ba61b07c7"
                     },
                     new Movie
                     {
@@ -101,7 +101,7 @@ namespace Movies.API.Data
                         Rating = "8.8",
                         ImageUrl = "images/src",
                         ReleaseDate = new DateTime(1994, 5, 5),
-                        OwnerId = "88421113"
+                        OwnerId = "d860efca-22d9-47fd-8249-791ba61b07c7"
                     }
             };
         }
