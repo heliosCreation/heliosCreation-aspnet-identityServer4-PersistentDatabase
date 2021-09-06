@@ -1,28 +1,31 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace Movies.Client.Models
+namespace Movies.API.Model.Movies
 {
-    public class Movie
+    public class MovieCreationModel
     {
-        public Guid Id { get; set; }
-
         [Required]
+        [MaxLength(120)]
         public string Title { get; set; }
 
         [Required]
+        [MaxLength(120)]
         public string Genre { get; set; }
 
         [Required]
+        [MaxLength(5)]
         public string Rating { get; set; }
 
         [Required]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = false)]
         public DateTime ReleaseDate { get; set; }
 
         [Required]
+        [MaxLength(120)]
         public string ImageUrl { get; set; }
-
     }
 }

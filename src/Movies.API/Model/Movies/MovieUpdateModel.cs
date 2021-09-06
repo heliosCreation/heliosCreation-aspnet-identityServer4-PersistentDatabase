@@ -1,28 +1,28 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Movies.Client.Models
+namespace Movies.API.Model.Movies
 {
-    public class Movie
+    public class MovieUpdateModel
     {
-        public Guid Id { get; set; }
-
         [Required]
+        [MaxLength(120)]
         public string Title { get; set; }
 
         [Required]
+        [MaxLength(120)]
         public string Genre { get; set; }
 
         [Required]
+        [MaxLength(5)]
         public string Rating { get; set; }
 
         [Required]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = false)]
         public DateTime ReleaseDate { get; set; }
 
         [Required]
+        [MaxLength(120)]
         public string ImageUrl { get; set; }
-
     }
 }

@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Movies.API.Model;
+using Movies.API.Data.Entities;
 using System;
 using System.Threading;
 using System.Threading.Tasks;

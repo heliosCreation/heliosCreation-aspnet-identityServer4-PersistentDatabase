@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
-using Movies.API.Model;
+using Movies.API.Data.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

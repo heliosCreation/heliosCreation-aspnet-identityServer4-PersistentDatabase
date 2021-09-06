@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Movies.API.Data;
-using Movies.API.Model;
+using Movies.API.Data.Entities;
+using Movies.API.Model.Movies;
 using Movies.API.Services;
 using System;
 using System.Collections.Generic;
@@ -16,102 +18,75 @@ namespace Movies.API.Controllers
     [Authorize("ClientIdPolicy")]
     public class MoviesController : ControllerBase
     {
-        private readonly MoviesContext _context;
+        private readonly IMovieRepository _movieRepository;
         private readonly ILoggedInUserService _user;
+        private readonly IMapper _mapper;
 
-        public MoviesController(MoviesContext context, ILoggedInUserService user)
+        public MoviesController(IMovieRepository movieRepository, ILoggedInUserService user, IMapper mapper)
         {
-            _context = context;
+            _movieRepository = movieRepository;
             _user = user;
+            _mapper = mapper;
         }
 
         // GET: api/Movies
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Movie>>> GetMovie()
+        public async Task<ActionResult<IEnumerable<MovieModel>>> GetMovies()
         {
-            var x = _user.getUserId();
-
-            return Ok( (await _context.Movie.ToListAsync()).Where(m => m.OwnerId == _user.getUserId()));
+            return Ok(await _movieRepository.GetMovies());
         }
 
         // GET: api/Movies/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Movie>> GetMovie(Guid id)
+        public async Task<ActionResult<MovieModel>> GetMovie(Guid id)
         {
 
-            var movie = await _context.Movie.FirstOrDefaultAsync(m => m.Id == id &&  m.OwnerId == _user.getUserId());
+            var movie = await _movieRepository.GetMovie(id);
 
             if (movie == null)
             {
                 return NotFound();
             }
+            var result = _mapper.Map<MovieModel>(movie);
 
-            return movie;
+            return Ok(result);
         }
 
-        // PUT: api/Movies/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutMovie(Guid id, Movie movie)
+        [HttpPost]
+        public async Task<ActionResult<MovieModel>> PostMovie(MovieCreationModel movie)
         {
-            if (id != movie.Id || _user.getUserId() != movie.OwnerId)
-            {
-                return BadRequest();
-            }
+            var movieForRepo = _mapper.Map<Movie>(movie);
+            movieForRepo.OwnerId = _user.getUserId();
+            var createdMovie = await _movieRepository.CreateMovie(movieForRepo);
+            return CreatedAtAction("GetMovie", new { id = createdMovie.Id }, movie);
+        }
 
-            _context.Entry(movie).State = EntityState.Modified;
-
-            try
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutMovie(Guid id, MovieUpdateModel movie)
+        {
+            var repoMovie = await _movieRepository.GetMovie(id);
+            if (repoMovie == null)
             {
-                await _context.SaveChangesAsync();
+                return NotFound();
             }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!MovieExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
+            await _movieRepository.UpdateMovie(_mapper.Map(movie,repoMovie));
             return NoContent();
         }
 
-        // POST: api/Movies
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPost]
-        public async Task<ActionResult<Movie>> PostMovie(Movie movie)
-        {
-            _context.Movie.Add(movie);
-            await _context.SaveChangesAsync();
+  
 
-            return CreatedAtAction("GetMovie", new { id = movie.Id }, movie);
-        }
-
-        // DELETE: api/Movies/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Movie>> DeleteMovie(Guid id)
+        public async Task<IActionResult> DeleteMovie(MovieDeleteModel deleteModel)
         {
-            var movie = await _context.Movie.FirstOrDefaultAsync(m => m.Id == id && m.OwnerId == _user.getUserId());
-            if (movie == null)
+            var repoMovie = await _movieRepository.GetMovie(deleteModel.Id);
+            if (repoMovie == null)
             {
                 return NotFound();
             }
-
-            _context.Movie.Remove(movie);
-            await _context.SaveChangesAsync();
-
-            return movie;
+            await _movieRepository.DeleteMovie(repoMovie);
+            return NoContent();
         }
 
-        private bool MovieExists(Guid id)
-        {
-            return _context.Movie.Any(e => e.Id == id);
-        }
+
     }
 }

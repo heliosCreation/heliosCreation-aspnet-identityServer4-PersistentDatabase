@@ -8,6 +8,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Movies.API.Data;
 using Movies.API.Services;
+using System.Reflection;
 
 namespace Movies.API
 {
@@ -42,12 +43,15 @@ namespace Movies.API
             {
                 option.AddPolicy("ClientIdPolicy", policy => policy.RequireClaim("client_id", "movie_api_client", "movies_mvc_client"));
             });
-            
+
             services.AddHttpContextAccessor();
 
             AddSwagger(services);
 
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
             services.AddScoped<ILoggedInUserService, LoggedInUserService>();
+            services.AddScoped<IMovieRepository, MovieRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

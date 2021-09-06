@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Movies.API.Model
+namespace Movies.API.Data.Entities
 {
     public abstract class AuditableEntity
     {
