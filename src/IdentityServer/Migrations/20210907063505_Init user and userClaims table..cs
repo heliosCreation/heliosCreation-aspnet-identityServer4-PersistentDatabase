@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace IdentityServer.Migrations
 {
-    public partial class InitUserandUserClaimstables : Migration
+    public partial class InituseranduserClaimstable : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -47,24 +47,26 @@ namespace IdentityServer.Migrations
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "ConcurrencyStamp", "IsActive", "Password", "Subject", "Username" },
-                values: new object[] { new Guid("13229d33-99e0-41b3-b18d-4f72127e3971"), "66745274-4272-4d5f-9b9b-9a92f4eddf58", true, "password", "d860efca-22d9-47fd-8249-791ba61b07c7", "Frank" });
+                values: new object[] { new Guid("13229d33-99e0-41b3-b18d-4f72127e3971"), "3fffbbf3-7d05-4b27-b419-930cb036e837", true, "password", "d860efca-22d9-47fd-8249-791ba61b07c7", "Frank" });
 
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "ConcurrencyStamp", "IsActive", "Password", "Subject", "Username" },
-                values: new object[] { new Guid("c6e8040f-b2c0-4986-af6c-d3b650e0927e"), "dfda2645-dc43-4ffa-bc0f-679fb2c9efad", true, "Helios", "5BE86359-073C-434B-AD2D-A3932222DABE", "Quentin" });
+                values: new object[] { new Guid("c6e8040f-b2c0-4986-af6c-d3b650e0927e"), "85032bef-d0fa-4b10-bae9-914e47a8a0b0", true, "Helios", "5BE86359-073C-434B-AD2D-A3932222DABE", "Quentin" });
 
             migrationBuilder.InsertData(
                 table: "UserClaims",
                 columns: new[] { "Id", "ConcurrencyStamp", "Type", "UserId", "Value" },
                 values: new object[,]
                 {
-                    { new Guid("f0f10949-dbd7-49fb-9614-2881dbb6611b"), "4d424141-4766-4b62-be36-5cb92fab3c05", "given_name", new Guid("13229d33-99e0-41b3-b18d-4f72127e3971"), "Frank" },
-                    { new Guid("c8d716d5-3ab5-4d14-94e8-173fa30d6dc3"), "1457a3cd-a5ce-424a-9f77-79e12eff6360", "family_name", new Guid("13229d33-99e0-41b3-b18d-4f72127e3971"), "Underwood" },
-                    { new Guid("7da35239-7000-45e0-a216-984b3a8e7d33"), "9a81ddb1-bbd2-4e11-9d7d-378465947daa", "role", new Guid("c6e8040f-b2c0-4986-af6c-d3b650e0927e"), "user" },
-                    { new Guid("6c155ffc-1782-4971-8e2e-cf020bfe4800"), "6d06df59-f764-4051-b78f-7afb55636941", "given_name", new Guid("c6e8040f-b2c0-4986-af6c-d3b650e0927e"), "Quentin" },
-                    { new Guid("7228b0b1-4b68-4183-9b2f-13bf8f0a7a64"), "97f5f6eb-2923-4218-bb9c-224f00c313d1", "family_name", new Guid("c6e8040f-b2c0-4986-af6c-d3b650e0927e"), "Couissinier" },
-                    { new Guid("6e23de7a-0b76-4ed7-a7c5-53bd93154f2d"), "35931318-e740-4f35-b395-134e36b91ef7", "role", new Guid("c6e8040f-b2c0-4986-af6c-d3b650e0927e"), "admin" }
+                    { new Guid("09402969-6b79-426f-9ec3-92d7dfd5df2f"), "61fdbf3d-acee-4ce9-9154-b136ea184af5", "given_name", new Guid("13229d33-99e0-41b3-b18d-4f72127e3971"), "Frank" },
+                    { new Guid("bc4f03f3-057a-4482-a77a-0fdba8f7239f"), "0378facc-1a16-4ae1-8c2c-812eb020ff36", "family_name", new Guid("13229d33-99e0-41b3-b18d-4f72127e3971"), "Underwood" },
+                    { new Guid("9af19235-b344-4f39-b71e-0ecd13658e36"), "7161170f-4059-40a5-bf5a-a37437de6143", "email", new Guid("13229d33-99e0-41b3-b18d-4f72127e3971"), "FrankUnderwood@someProvider.com" },
+                    { new Guid("9834ee0e-ba76-4e8d-8d19-22bdb94cf480"), "aa29e987-ad8d-4cce-9335-21eac80ee3c6", "country", new Guid("13229d33-99e0-41b3-b18d-4f72127e3971"), "En" },
+                    { new Guid("d58f23ca-f25d-4730-9a4b-0de367523fdb"), "6c416774-4f1b-40f8-bf3a-b8f5152efb46", "given_name", new Guid("c6e8040f-b2c0-4986-af6c-d3b650e0927e"), "Quentin" },
+                    { new Guid("62e3e514-810d-4358-95ad-bcd31ab5026c"), "290bfe87-5d08-4e87-bcd1-79a49d55b768", "family_name", new Guid("c6e8040f-b2c0-4986-af6c-d3b650e0927e"), "Couissinier" },
+                    { new Guid("dbad180e-09cd-49a3-be96-a5300ab7a818"), "7dc991ae-b070-4039-8033-d21bab6c774e", "email", new Guid("c6e8040f-b2c0-4986-af6c-d3b650e0927e"), "Quentin.couissinier@someProvider.com" },
+                    { new Guid("33367cc5-aa93-4bc7-9cc2-cec41bd32ea1"), "8fafe672-1734-47fc-bbf2-924b532a8b79", "country", new Guid("c6e8040f-b2c0-4986-af6c-d3b650e0927e"), "Fr" }
                 });
 
             migrationBuilder.CreateIndex(

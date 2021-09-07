@@ -4,9 +4,9 @@ using Movies.API.Model.Movies;
 
 namespace Movies.API.Profiles
 {
-    public class MovieProfile : Profile
+    public class MovieMappingProfiles : Profile
     {
-        public MovieProfile()
+        public MovieMappingProfiles()
         {
             CreateMap<MovieCreationModel, Movie>();
 

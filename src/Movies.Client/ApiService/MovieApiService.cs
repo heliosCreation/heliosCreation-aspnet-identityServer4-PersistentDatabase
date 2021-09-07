@@ -29,6 +29,7 @@ namespace Movies.Client.ApiService
         public async Task<UserInfoViewModel> GetUserInfo()
         {
             var idpClient = _httpClientFactory.CreateClient("IDPClient");
+
             var metaDataResponse = await idpClient.GetDiscoveryDocumentAsync();
 
             if (metaDataResponse.IsError)

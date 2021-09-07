@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.Extensions.Options;
+using Movies.Client.PostConfigurationOptions;
 
 namespace Movies.Client.Extensions.ServiceExtensions
 {
@@ -39,7 +41,6 @@ namespace Movies.Client.Extensions.ServiceExtensions
 
                 opt.Scope.Add("address");
                 opt.Scope.Add("email");
-                opt.Scope.Add("roles");
                 opt.Scope.Add("movieAPI");
 
                 opt.SaveTokens = true;
@@ -47,9 +48,7 @@ namespace Movies.Client.Extensions.ServiceExtensions
 
                 //Some claims are filtered by the middleware pipeline. With this command, we remove the filter.
                 //opt.ClaimActions.Remove("nbf");
-                //Some claims might also not be wanted. With this method, we remove them from the claim Identity. Thus, making the cookie lighter.
                 opt.ClaimActions.MapAllExcept("sid", "idp", "s_hash", "auth_time");
-                opt.ClaimActions.MapJsonKey("role", "role");
 
                 //Token should posesses those values
                 opt.TokenValidationParameters = new TokenValidationParameters
@@ -58,6 +57,9 @@ namespace Movies.Client.Extensions.ServiceExtensions
                     RoleClaimType = "role"
                 };
             });
+            services.AddSingleton<
+                    IPostConfigureOptions<OpenIdConnectOptions>,
+                    OpenIdConnectOptionsPostConfigureOptions>();
 
             return services;
 

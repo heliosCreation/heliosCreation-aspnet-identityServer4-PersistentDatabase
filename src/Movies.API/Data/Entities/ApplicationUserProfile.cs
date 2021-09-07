@@ -15,5 +15,9 @@ namespace Movies.API.Data.Entities
         [Required]
         [MaxLength(250)]
         public string SubscriptionLevel { get; set; }
+
+        [Required]
+        [MaxLength(250)]
+        public string Role { get; set; }
     }
 }

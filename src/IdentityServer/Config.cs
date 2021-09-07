@@ -13,16 +13,6 @@ namespace IdentityServer
         public static IEnumerable<Client> Clients =>
             new Client[]
             {
-                   //new Client
-                   //{
-                   //     ClientId = "movie_api_Client",
-                   //     AllowedGrantTypes = GrantTypes.ClientCredentials,
-                   //     ClientSecrets =
-                   //     {
-                   //         new Secret("secret".Sha256())
-                   //     },
-                   //     AllowedScopes = { "movieAPI" }
-                   //},
                    new Client
                    {
                        ClientId = "movies_mvc_client",
@@ -49,7 +39,7 @@ namespace IdentityServer
                            IdentityServerConstants.StandardScopes.Address,
                            IdentityServerConstants.StandardScopes.Email,
                            "movieAPI",
-                           "roles"
+                           "country"
                        }
                    }
             };
@@ -66,7 +56,7 @@ namespace IdentityServer
                //new ApiResource("movieAPI", "Movie API")
           };
         
-        //Informations accessible to the user when logged in the system
+        //Informations accessible to the user return by the IDP
         public static IEnumerable<IdentityResource> IdentityResources =>
           new IdentityResource[]
           {
@@ -74,7 +64,7 @@ namespace IdentityServer
               new IdentityResources.Profile(),
               new IdentityResources.Address(),
               new IdentityResources.Email(),
-              new IdentityResource("roles","Your role(s)", new List<string>() { "role" })
+              new IdentityResource("country","Your country", new List<string>() { "country" })
           };
     }
 }

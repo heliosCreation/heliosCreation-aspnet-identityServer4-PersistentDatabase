@@ -13,13 +13,19 @@ namespace Movies.API.Data
         {
             if (!moviesContext.Movie.Any())
             {
-                moviesContext.Movie.AddRange(GetPreconfiguredOrders());
+                moviesContext.Movie.AddRange(GetPreconfiguredMovies());
                 await moviesContext.SaveChangesAsync();
-                logger.LogInformation("Seed database associated with context {DbContextName}", typeof(MoviesContext).Name);
+                logger.LogInformation("Seed movies for database associated with context {DbContextName}", typeof(MoviesContext).Name);
+            }
+            if (!moviesContext.ApplicationUserProfiles.Any())
+            {
+                moviesContext.ApplicationUserProfiles.AddRange(GetPreconfiguredProfiles());
+                await moviesContext.SaveChangesAsync();
+                logger.LogInformation("Seed user profiles for database associated with context {DbContextName}", typeof(MoviesContext).Name);
             }
         }
 
-        private static IEnumerable<Movie> GetPreconfiguredOrders()
+        private static IEnumerable<Movie> GetPreconfiguredMovies()
         {
             return new List<Movie>
             {
@@ -103,6 +109,27 @@ namespace Movies.API.Data
                         ReleaseDate = new DateTime(1994, 5, 5),
                         OwnerId = "d860efca-22d9-47fd-8249-791ba61b07c7"
                     }
+            };
+        }
+
+        private static IEnumerable<ApplicationUserProfile> GetPreconfiguredProfiles()
+        {
+            return new List<ApplicationUserProfile>
+            {
+                new ApplicationUserProfile
+                {
+                    Id = Guid.NewGuid(),
+                    Subject = "5BE86359-073C-434B-AD2D-A3932222DABE",
+                    SubscriptionLevel = "payingUser",
+                    Role = "admin"
+                },
+                new ApplicationUserProfile
+                {
+                    Id = Guid.NewGuid(),
+                    Subject = "d860efca-22d9-47fd-8249-791ba61b07c7",
+                    SubscriptionLevel = "freeUser",
+                    Role = "user"
+                }
             };
         }
     }

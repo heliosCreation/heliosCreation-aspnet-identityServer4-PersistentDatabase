@@ -18,6 +18,13 @@ namespace Movies.Client.Extensions.ServiceExtensions
                 client.DefaultRequestHeaders.Add(HeaderNames.Accept, "application/json");
             }).AddHttpMessageHandler<BearerTokenHandler>();
 
+            services.AddHttpClient("BasicMovieAPIClient", client =>
+            {
+                client.BaseAddress = new Uri("https://localhost:5010/"); //The url of the API Gateway
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Add(HeaderNames.Accept, "application/json");
+            });
+
             services.AddHttpClient("IDPClient", client =>
             {
                 client.BaseAddress = new Uri("https://localhost:5005/");
@@ -27,14 +34,6 @@ namespace Movies.Client.Extensions.ServiceExtensions
 
             return services;
 
-            //Used in the code flow version to access the token endpoint to retrieve API Valid token. 
-            //services.AddSingleton(new ClientCredentialsTokenRequest
-            //{
-            //    Address = "https://localhost:5005/connect/token",
-            //    ClientId = "movieApiClient",
-            //    ClientSecret = "secret",
-            //    Scope = "movieAPI"
-            //}); return services;
         }
     }
 }

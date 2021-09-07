@@ -14,6 +14,7 @@ namespace Movies.API.Data
         }
 
         public DbSet<Movie> Movie { get; set; }
+        public DbSet<ApplicationUserProfile> ApplicationUserProfiles { get; set; }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {

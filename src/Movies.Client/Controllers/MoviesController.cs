@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Movies.Client.ApiService;
 using Movies.Client.Models;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
@@ -23,8 +24,20 @@ namespace Movies.Client.Controllers
         //[Authorize(Roles = "admin")]
         public async Task<IActionResult> AdminOnly()
         {
-            var userInfo = await _movieApiService.GetUserInfo();
-            return View(userInfo);
+            var userInfoDictionnary = new Dictionary<string, string>();
+            foreach (var claim in User.Claims)
+            {
+                if (userInfoDictionnary.ContainsKey(claim.Type))
+                {
+                    userInfoDictionnary[claim.Type] = $"{userInfoDictionnary[claim.Type]} , {claim.Value}";
+                }
+                else
+                {
+                    userInfoDictionnary.Add(claim.Type, claim.Value);
+                }
+
+            }
+            return View(new UserInfoViewModel(userInfoDictionnary));
         }
 
         // GET: Movies

@@ -36,10 +36,17 @@ namespace IdentityServer.DbContexts.Configurations
                 },
                 new UserClaim()
                 {
+                     Id = Guid.NewGuid(),
+                     UserId = new Guid("13229d33-99e0-41b3-b18d-4f72127e3971"),
+                     Type = JwtClaimTypes.Email,
+                     Value = "FrankUnderwood@someProvider.com"
+                },
+                new UserClaim()
+                {
                     Id = Guid.NewGuid(),
                     UserId = new Guid("13229d33-99e0-41b3-b18d-4f72127e3971"),
-                    Type = JwtClaimTypes.Role,
-                    Value = "user"
+                    Type = "country",
+                    Value = "En"
                 },
 
                 //Quentin's Claims
@@ -61,15 +68,15 @@ namespace IdentityServer.DbContexts.Configurations
                 {
                     Id = Guid.NewGuid(),
                     UserId = new Guid("c6e8040f-b2c0-4986-af6c-d3b650e0927e"),
-                    Type = JwtClaimTypes.Role,
-                    Value = "admin"
+                    Type = JwtClaimTypes.Email,
+                    Value = "Quentin.couissinier@someProvider.com"
                 },
                 new UserClaim()
                 {
                     Id = Guid.NewGuid(),
                     UserId = new Guid("c6e8040f-b2c0-4986-af6c-d3b650e0927e"),
-                    Type = JwtClaimTypes.Role,
-                    Value = "user"
+                    Type = "country",
+                    Value = "Fr"
                 },
             };
         }
