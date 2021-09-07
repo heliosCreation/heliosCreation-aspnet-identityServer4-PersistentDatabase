@@ -21,8 +21,8 @@ namespace Movies.Client.Controllers
             _movieApiService = movieApiService;
         }
 
-        //[Authorize(Roles = "admin")]
-        public async Task<IActionResult> AdminOnly()
+        [Authorize(Roles = "admin")]
+        public IActionResult AdminOnly()
         {
             var userInfoDictionnary = new Dictionary<string, string>();
             foreach (var claim in User.Claims)

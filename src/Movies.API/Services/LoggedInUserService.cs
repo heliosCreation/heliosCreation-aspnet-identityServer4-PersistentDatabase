@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
-using System.Threading.Tasks;
 
 namespace Movies.API.Services
 {
@@ -21,7 +18,7 @@ namespace Movies.API.Services
             return _user?.Identity?.Name;
         }
 
-        public string getUserId()
+        public string getUserSub()
         {
             return _user?
                 .Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?

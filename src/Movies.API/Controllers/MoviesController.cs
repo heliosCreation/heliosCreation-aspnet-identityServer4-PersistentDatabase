@@ -53,10 +53,11 @@ namespace Movies.API.Controllers
         }
 
         [HttpPost]
+        [Authorize(Policy = "MustBePayingUser")]
         public async Task<ActionResult<MovieModel>> PostMovie(MovieCreationModel movie)
         {
             var movieForRepo = _mapper.Map<Movie>(movie);
-            movieForRepo.OwnerId = _user.getUserId();
+            movieForRepo.OwnerId = _user.getUserSub();
             var createdMovie = await _movieRepository.CreateMovie(movieForRepo);
             return CreatedAtAction("GetMovie", new { id = createdMovie.Id }, movie);
         }

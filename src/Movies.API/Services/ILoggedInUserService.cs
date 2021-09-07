@@ -8,6 +8,6 @@ namespace Movies.API.Services
     public interface ILoggedInUserService
     {
         string getName();
-        string getUserId();
+        string getUserSub();
     }
 }
