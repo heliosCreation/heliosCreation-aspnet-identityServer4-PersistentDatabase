@@ -1,8 +1,6 @@
-﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Movies.API.Data;
 using Movies.API.Data.Entities;
-using Movies.API.Model.Movies;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,12 +22,12 @@ namespace Movies.API.Services
 
         public async Task<Movie> GetMovie(Guid id)
         {
-            return await _context.Movie.FirstOrDefaultAsync(m => m.Id == id);
+            return await _context.Movie.FirstOrDefaultAsync(m => m.Id == id && m.OwnerId == _user.getUserSub());
         }
 
         public async Task<IReadOnlyList<Movie>> GetMovies()
         {
-            return await _context.Movie.Where(m => m.OwnerId == _user.getUserId()).ToListAsync();
+            return await _context.Movie.Where(m => m.OwnerId == _user.getUserSub()).ToListAsync();
         }
 
         public async Task<Movie> CreateMovie(Movie movie)

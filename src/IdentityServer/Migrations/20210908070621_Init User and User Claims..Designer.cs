@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IdentityServer.Migrations
 {
     [DbContext(typeof(IdentityDbContext))]
-    [Migration("20210907063505_Init user and userClaims table.")]
-    partial class InituseranduserClaimstable
+    [Migration("20210908070621_Init User and User Claims.")]
+    partial class InitUserandUserClaims
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,25 +31,33 @@ namespace IdentityServer.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(250)")
+                        .HasMaxLength(250);
+
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                        .HasColumnType("nvarchar(250)")
+                        .HasMaxLength(250);
 
                     b.Property<string>("Subject")
                         .IsRequired()
-                        .HasColumnType("nvarchar(200)")
-                        .HasMaxLength(200);
+                        .HasColumnType("nvarchar(250)")
+                        .HasMaxLength(250);
 
                     b.Property<string>("Username")
                         .IsRequired()
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                        .HasColumnType("nvarchar(250)")
+                        .HasMaxLength(250);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
 
                     b.HasIndex("Subject")
                         .IsUnique();
@@ -63,7 +71,8 @@ namespace IdentityServer.Migrations
                         new
                         {
                             Id = new Guid("13229d33-99e0-41b3-b18d-4f72127e3971"),
-                            ConcurrencyStamp = "3fffbbf3-7d05-4b27-b419-930cb036e837",
+                            ConcurrencyStamp = "14e1ec2c-df2d-4055-be9e-1eda412bcbad",
+                            Email = "frank@someProvider.com",
                             IsActive = true,
                             Password = "password",
                             Subject = "d860efca-22d9-47fd-8249-791ba61b07c7",
@@ -72,7 +81,8 @@ namespace IdentityServer.Migrations
                         new
                         {
                             Id = new Guid("c6e8040f-b2c0-4986-af6c-d3b650e0927e"),
-                            ConcurrencyStamp = "85032bef-d0fa-4b10-bae9-914e47a8a0b0",
+                            ConcurrencyStamp = "9a1e0192-bdaa-486e-8bc9-a863fdda771d",
+                            Email = "quentin@someprovider.com",
                             IsActive = true,
                             Password = "Helios",
                             Subject = "5BE86359-073C-434B-AD2D-A3932222DABE",
@@ -112,64 +122,48 @@ namespace IdentityServer.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("09402969-6b79-426f-9ec3-92d7dfd5df2f"),
-                            ConcurrencyStamp = "61fdbf3d-acee-4ce9-9154-b136ea184af5",
+                            Id = new Guid("9f5bd15a-11ef-4328-8ba8-c35fe30a8312"),
+                            ConcurrencyStamp = "fb34c06c-4dcb-4e64-9af1-b685664b6351",
                             Type = "given_name",
                             UserId = new Guid("13229d33-99e0-41b3-b18d-4f72127e3971"),
                             Value = "Frank"
                         },
                         new
                         {
-                            Id = new Guid("bc4f03f3-057a-4482-a77a-0fdba8f7239f"),
-                            ConcurrencyStamp = "0378facc-1a16-4ae1-8c2c-812eb020ff36",
+                            Id = new Guid("a9768c3a-57b3-457e-8304-29e2d479cf63"),
+                            ConcurrencyStamp = "cfd2795e-55ce-46c8-9046-c1467e1add32",
                             Type = "family_name",
                             UserId = new Guid("13229d33-99e0-41b3-b18d-4f72127e3971"),
                             Value = "Underwood"
                         },
                         new
                         {
-                            Id = new Guid("9af19235-b344-4f39-b71e-0ecd13658e36"),
-                            ConcurrencyStamp = "7161170f-4059-40a5-bf5a-a37437de6143",
-                            Type = "email",
-                            UserId = new Guid("13229d33-99e0-41b3-b18d-4f72127e3971"),
-                            Value = "FrankUnderwood@someProvider.com"
-                        },
-                        new
-                        {
-                            Id = new Guid("9834ee0e-ba76-4e8d-8d19-22bdb94cf480"),
-                            ConcurrencyStamp = "aa29e987-ad8d-4cce-9335-21eac80ee3c6",
+                            Id = new Guid("836751d7-dc80-470c-beeb-f58d75ff780f"),
+                            ConcurrencyStamp = "8a4dd035-bb21-451d-9a13-07b2b528c6fe",
                             Type = "country",
                             UserId = new Guid("13229d33-99e0-41b3-b18d-4f72127e3971"),
                             Value = "En"
                         },
                         new
                         {
-                            Id = new Guid("d58f23ca-f25d-4730-9a4b-0de367523fdb"),
-                            ConcurrencyStamp = "6c416774-4f1b-40f8-bf3a-b8f5152efb46",
+                            Id = new Guid("e86abbdd-bd7f-4973-a52a-a3ec2fbb10ad"),
+                            ConcurrencyStamp = "511f21fb-05f0-4388-8166-1af7540743c7",
                             Type = "given_name",
                             UserId = new Guid("c6e8040f-b2c0-4986-af6c-d3b650e0927e"),
                             Value = "Quentin"
                         },
                         new
                         {
-                            Id = new Guid("62e3e514-810d-4358-95ad-bcd31ab5026c"),
-                            ConcurrencyStamp = "290bfe87-5d08-4e87-bcd1-79a49d55b768",
+                            Id = new Guid("994933bd-ccfc-4251-a9aa-3909a3e482e6"),
+                            ConcurrencyStamp = "f9ff7a42-d2c5-4754-a3f3-ae5b35aa485e",
                             Type = "family_name",
                             UserId = new Guid("c6e8040f-b2c0-4986-af6c-d3b650e0927e"),
                             Value = "Couissinier"
                         },
                         new
                         {
-                            Id = new Guid("dbad180e-09cd-49a3-be96-a5300ab7a818"),
-                            ConcurrencyStamp = "7dc991ae-b070-4039-8033-d21bab6c774e",
-                            Type = "email",
-                            UserId = new Guid("c6e8040f-b2c0-4986-af6c-d3b650e0927e"),
-                            Value = "Quentin.couissinier@someProvider.com"
-                        },
-                        new
-                        {
-                            Id = new Guid("33367cc5-aa93-4bc7-9cc2-cec41bd32ea1"),
-                            ConcurrencyStamp = "8fafe672-1734-47fc-bbf2-924b532a8b79",
+                            Id = new Guid("aa05cc22-f634-4619-8ee6-15a0f0a3a22a"),
+                            ConcurrencyStamp = "ff03cf76-6c63-4eea-b04e-d1650655daf6",
                             Type = "country",
                             UserId = new Guid("c6e8040f-b2c0-4986-af6c-d3b650e0927e"),
                             Value = "Fr"

@@ -10,15 +10,20 @@ namespace IdentityServer.Entities
         public Guid Id { get; set; }
 
         [Required]
-        [MaxLength(200)]
+        [MaxLength(250)]
         public string Subject { get; set; }
 
         [Required]
-        [MaxLength(100)]
+        [MaxLength(250)]
         public string Username { get; set; }
 
         [Required]
-        [MaxLength(100)]
+        [EmailAddress]
+        [MaxLength(250)]
+        public string Email { get; set; }
+
+        [Required]
+        [MaxLength(250)]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 

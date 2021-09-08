@@ -1,14 +1,11 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Movies.API.Data;
 using Movies.API.Data.Entities;
 using Movies.API.Model.Movies;
 using Movies.API.Services;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Movies.API.Controllers
@@ -70,11 +67,11 @@ namespace Movies.API.Controllers
             {
                 return NotFound();
             }
-            await _movieRepository.UpdateMovie(_mapper.Map(movie,repoMovie));
+            await _movieRepository.UpdateMovie(_mapper.Map(movie, repoMovie));
             return NoContent();
         }
 
-  
+
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteMovie(MovieDeleteModel deleteModel)
