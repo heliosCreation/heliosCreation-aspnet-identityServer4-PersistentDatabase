@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Movies.API.Data.Entities;
 using Movies.API.Model.ApplicationUserProfile;
 using Movies.API.Services;
 using System;
@@ -34,7 +35,13 @@ namespace Movies.API.Controllers
 
             if (applicationUserProfileFromRepo == null)
             {
-                return NotFound();
+                applicationUserProfileFromRepo = new ApplicationUserProfile
+                {
+                    Subject = subject,
+                    SubscriptionLevel = "freeUser",
+                    Role = "user"
+                };
+                _applicationUserProfileService.AddApplicationUserProfile(applicationUserProfileFromRepo);
             }
 
             return Ok(_mapper.Map<ApplicationUserProfileModel>(applicationUserProfileFromRepo));

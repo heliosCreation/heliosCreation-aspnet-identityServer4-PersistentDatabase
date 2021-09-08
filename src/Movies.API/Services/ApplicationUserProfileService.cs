@@ -31,6 +31,7 @@ namespace Movies.API.Services
         public void AddApplicationUserProfile(ApplicationUserProfile applicationUserProfile)
         {
             _context.ApplicationUserProfiles.Add(applicationUserProfile);
+            _context.SaveChanges();
         }
     }
 }

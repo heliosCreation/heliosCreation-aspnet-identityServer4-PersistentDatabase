@@ -27,7 +27,7 @@ namespace IdentityServer.DbContexts.Configurations
                 {
                     Id = new Guid("13229d33-99e0-41b3-b18d-4f72127e3971"),
                     Email = "frank@someProvider.com",
-                    Password = "password",
+                    Password = "AQAAAAEAACcQAAAAEKyU/alhPlQLX31AsXRuntxprzKvIbIJgIjeTS8YTumsUqRoPThoPS74LnHSBMjTVA==",//password
                     Subject = "d860efca-22d9-47fd-8249-791ba61b07c7",
                     Username = "Frank",
                     IsActive = true
@@ -38,7 +38,7 @@ namespace IdentityServer.DbContexts.Configurations
                     Email = "quentin@someprovider.com",
                     Subject = "5BE86359-073C-434B-AD2D-A3932222DABE",
                     Username = "Quentin",
-                    Password = "Helios",
+                    Password = "AQAAAAEAACcQAAAAEJnYqlDeDnLqIDR9u5TaqOdi87lAZQDTMprpuTcccPmPdp7+6t5EzqM3nqZEw5B2jQ==",//Helios
                     IsActive = true
                 });
         }

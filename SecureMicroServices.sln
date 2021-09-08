@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer", "src\Ident
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Movies.Client", "src\Movies.Client\Movies.Client.csproj", "{E0EB40EA-3BA2-4195-9113-B54ED42F9DDC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiGateway", "src\ApiGateway\ApiGateway.csproj", "{3346F876-80D8-4C7E-A693-F2BA0B363123}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiGateway", "src\ApiGateway\ApiGateway.csproj", "{3346F876-80D8-4C7E-A693-F2BA0B363123}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

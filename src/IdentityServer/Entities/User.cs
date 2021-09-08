@@ -34,5 +34,8 @@ namespace IdentityServer.Entities
         public string ConcurrencyStamp { get; set; } = Guid.NewGuid().ToString();
 
         public ICollection<UserClaim> Claims { get; set; } = new List<UserClaim>();
+        public string SecurityCode { get; internal set; }
+        public DateTime SecurityCodeExpirationDate { get; set; }
+
     }
 }

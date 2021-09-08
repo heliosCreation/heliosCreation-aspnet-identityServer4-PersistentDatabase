@@ -42,7 +42,6 @@ namespace IdentityServer.UserRegistration
 
             var userToCreate = new User
             {
-                Password = model.Password,
                 Subject = Guid.NewGuid().ToString(),
                 Username = model.Username,
                 Email = model.Email,
@@ -72,7 +71,7 @@ namespace IdentityServer.UserRegistration
                 Value = model.FamilyName
             });
 
-            _localUserService.AddUser(userToCreate);
+            _localUserService.AddUser(userToCreate, model.Password);
             await _localUserService.SaveChangesAsync();
 
             var identity = new ClaimsIdentity(new List<Claim>()

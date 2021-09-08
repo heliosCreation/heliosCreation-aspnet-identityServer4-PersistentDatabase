@@ -1,9 +1,11 @@
 ﻿using IdentityServer.DbContexts;
 using IdentityServer.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 
 namespace IdentityServer.Services
@@ -11,12 +13,15 @@ namespace IdentityServer.Services
     public class LocalUserService : ILocalUserService
     {
         private readonly IdentityDbContext _context;
+        private readonly IPasswordHasher<User> _hasher;
 
         public LocalUserService(
-            IdentityDbContext context)
+            IdentityDbContext context,
+            IPasswordHasher<User> hasher)
         {
             _context = context ??
                 throw new ArgumentNullException(nameof(context));
+            _hasher = hasher ?? throw new ArgumentNullException(nameof(hasher));
         }
 
         public async Task<bool> IsUserActive(string subject)
@@ -36,8 +41,9 @@ namespace IdentityServer.Services
             return user.IsActive;
         }
 
-        public async Task<bool> ValidateClearTextCredentialsAsync(string userName,
-          string password)
+
+        public async Task<bool> ValidateCredentialsAsync(string userName,
+            string password)
         {
             if (string.IsNullOrWhiteSpace(userName) ||
                 string.IsNullOrWhiteSpace(password))
@@ -58,34 +64,9 @@ namespace IdentityServer.Services
             }
 
             // Validate credentials
-            return (user.Password == password);
+            var verificationResult = _hasher.VerifyHashedPassword(user, user.Password, password);
+            return (verificationResult == PasswordVerificationResult.Success);
         }
-
-        //public async Task<bool> ValidateCredentialsAsync(string userName, 
-        //    string password)
-        //{
-        //    if (string.IsNullOrWhiteSpace(userName) || 
-        //        string.IsNullOrWhiteSpace(password))
-        //    {
-        //        return false;
-        //    }
-
-        //    var user = await GetUserByUserNameAsync(userName);
-
-        //    if (user == null)
-        //    {
-        //        return false;
-        //    }
-
-        //    if (!user.Active)
-        //    {
-        //        return false;
-        //    }
-
-        //    // Validate credentials
-        //    var verificationResult = _passwordHasher.VerifyHashedPassword(user, user.Password, password);        
-        //    return (verificationResult == PasswordVerificationResult.Success);
-        //}
 
         public async Task<User> GetUserByUserNameAsync(string userName)
         {
@@ -118,61 +99,45 @@ namespace IdentityServer.Services
             return await _context.Users.FirstOrDefaultAsync(u => u.Subject == subject);
         }
 
-        public void AddUser(User userToAdd)
+
+        public void AddUser(User userToAdd, string password)
         {
             if (userToAdd == null)
             {
                 throw new ArgumentNullException(nameof(userToAdd));
             }
 
+            if (string.IsNullOrWhiteSpace(password))
+            {
+                throw new ArgumentNullException(nameof(password));
+            }
+
             if (_context.Users.Any(u => u.Username == userToAdd.Username))
             {
                 // in a real-life scenario you'll probably want to 
-                // return this as a validation issue
+                // return this a a validation issue
                 throw new Exception("Username must be unique");
             }
 
+            if (_context.Users.Any(u => u.Email == userToAdd.Email))
+            {
+                // in a real-life scenario you'll probably want to 
+                // return this a a validation issue
+                throw new Exception("Email must be unique");
+            }
+
+            // hash & salt the password
+            userToAdd.Password = _hasher.HashPassword(userToAdd, password);
+
+            using (var randomNumberGenerator = new RNGCryptoServiceProvider())
+            {
+                var securityCodeData = new byte[128];
+                randomNumberGenerator.GetBytes(securityCodeData);
+                userToAdd.SecurityCode = Convert.ToBase64String(securityCodeData);
+            }
+            userToAdd.SecurityCodeExpirationDate = DateTime.UtcNow.AddHours(1);
             _context.Users.Add(userToAdd);
         }
-
-        //public void AddUser(User userToAdd, string password)
-        //{
-        //    if (userToAdd == null)
-        //    {
-        //        throw new ArgumentNullException(nameof(userToAdd));
-        //    }
-
-        //    if (string.IsNullOrWhiteSpace(password))
-        //    {
-        //        throw new ArgumentNullException(nameof(password));
-        //    }
-
-        //    if (_context.Users.Any(u => u.UserName == userToAdd.UserName))
-        //    {
-        //        // in a real-life scenario you'll probably want to 
-        //        // return this a a validation issue
-        //        throw new Exception("Username must be unique");
-        //    }
-
-        //    if (_context.Users.Any(u => u.Email == userToAdd.Email))
-        //    {
-        //        // in a real-life scenario you'll probably want to 
-        //        // return this a a validation issue
-        //        throw new Exception("Email must be unique");
-        //    }
-
-        //    // hash & salt the password
-        //    userToAdd.Password = _passwordHasher.HashPassword(userToAdd, password);
-
-        //    using (var randomNumberGenerator = new RNGCryptoServiceProvider())
-        //    {
-        //        var securityCodeData = new byte[128];
-        //        randomNumberGenerator.GetBytes(securityCodeData);
-        //        userToAdd.SecurityCode = Convert.ToBase64String(securityCodeData);
-        //    }
-        //    userToAdd.SecurityCodeExpirationDate = DateTime.UtcNow.AddHours(1);
-        //    _context.Users.Add(userToAdd);
-        //}
 
         //public async Task<bool> ActivateUser(string securityCode)
         //{
