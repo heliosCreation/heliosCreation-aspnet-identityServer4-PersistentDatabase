@@ -27,11 +27,11 @@ namespace IdentityServer.Services
         Task<bool> ActivateUser(
             string securityCode);
         Task<bool> SaveChangesAsync();
-        //Task<string> InitiatePasswordResetRequest(
-        //    string email);
-        //Task<bool> SetPassword(
-        //    string securityCode, 
-        //    string password);
+        Task<string> InitiatePasswordResetRequest(
+            string email);
+        Task<bool> SetPassword(
+            string securityCode,
+            string password);
         //Task<User> GetUserByExternalProvider(
         //    string provider,
         //    string providerIdentityKey);
