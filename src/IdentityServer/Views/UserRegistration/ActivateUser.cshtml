@@ -1,0 +1,12 @@
+﻿
+@{
+    ViewData["Title"] = "User activation";
+}
+
+<h5>@ViewData["message"]@{
+    if (!String.IsNullOrEmpty(ViewData["returnUrl"].ToString()))
+    {
+        @:Click <a href = "@ViewData["returnUrl"]" > here.</a> to login.
+    }
+} </h5>
+

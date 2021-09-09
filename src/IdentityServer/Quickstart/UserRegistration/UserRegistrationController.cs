@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -31,6 +32,24 @@ namespace IdentityServer.UserRegistration
             return View(new RegisterUserViewModel() { ReturnUrl = returnUrl });
         }
 
+        [HttpGet]
+        public async Task<IActionResult> ActivateUser(string securityCode, string returnUrl)
+        {
+            if (await _localUserService.ActivateUser(securityCode))
+            {
+                ViewData["Message"] = "Congratulation, you are now registered with us.";
+                ViewData["returnUrl"] = returnUrl;
+            }
+            else
+            {
+                ViewData["Message"] = "Something went wrong while validating your request. Click here to resend an activation link.";
+            }
+
+            await _localUserService.SaveChangesAsync();
+
+            return View();
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> RegisterUser(RegisterUserViewModel model)
@@ -45,7 +64,7 @@ namespace IdentityServer.UserRegistration
                 Subject = Guid.NewGuid().ToString(),
                 Username = model.Username,
                 Email = model.Email,
-                IsActive = true
+                IsActive = false
             };
             userToCreate.Claims.Add(new UserClaim()
             {
@@ -81,18 +100,23 @@ namespace IdentityServer.UserRegistration
             }, "custom");
             var principal = new ClaimsPrincipal(identity);
 
+            var link = Url.ActionLink("ActivateUser", "UserRegistration", new { securityCode = userToCreate.SecurityCode, returnUrl = model.ReturnUrl });
 
-            // log the user in
-            await HttpContext.SignInAsync(principal);
+            //TODO Send link via email
+            Debug.WriteLine(link);
 
-            // continue with the flow     
-            if (_identityServerInteractionService.IsValidReturnUrl(model.ReturnUrl)
-                || Url.IsLocalUrl(model.ReturnUrl))
-            {
-                return Redirect(model.ReturnUrl);
-            }
 
-            return Redirect("~/");
+            //// log the user in
+            //await HttpContext.SignInAsync(principal);
+
+            //// continue with the flow     
+            //if (_identityServerInteractionService.IsValidReturnUrl(model.ReturnUrl)
+            //    || Url.IsLocalUrl(model.ReturnUrl))
+            //{
+            //    return Redirect(model.ReturnUrl);
+            //}
+
+            return View("ActivationCodeSent");
         }
     }
 }

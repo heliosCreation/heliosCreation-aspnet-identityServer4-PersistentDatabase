@@ -139,27 +139,27 @@ namespace IdentityServer.Services
             _context.Users.Add(userToAdd);
         }
 
-        //public async Task<bool> ActivateUser(string securityCode)
-        //{
-        //    if (string.IsNullOrWhiteSpace(securityCode))
-        //    {
-        //        throw new ArgumentNullException(nameof(securityCode));
-        //    }
+        public async Task<bool> ActivateUser(string securityCode)
+        {
+            if (string.IsNullOrWhiteSpace(securityCode))
+            {
+                throw new ArgumentNullException(nameof(securityCode));
+            }
 
-        //    // find an user with this security code as an active security code.  
-        //    var user = await _context.Users.FirstOrDefaultAsync(u => 
-        //        u.SecurityCode == securityCode && 
-        //        u.SecurityCodeExpirationDate >= DateTime.UtcNow);
+            // find an user with this security code as an active security code.  
+            var user = await _context.Users.FirstOrDefaultAsync(u => 
+                u.SecurityCode == securityCode && 
+                u.SecurityCodeExpirationDate >= DateTime.UtcNow);
 
-        //    if (user == null)
-        //    {
-        //        return false;
-        //    }
+            if (user == null)
+            {
+                return false;
+            }
 
-        //    user.Active = true;
-        //    user.SecurityCode = null;
-        //    return true;
-        //}
+            user.IsActive = true;
+            user.SecurityCode = null;
+            return true;
+        }
 
         //public async Task<bool> AddUserSecret(string subject, string name, string secret)
         //{

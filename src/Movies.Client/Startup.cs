@@ -1,14 +1,12 @@
-﻿using IdentityModel.Client;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Net.Http.Headers;
 using Movies.Client.ApiService;
+using Movies.Client.ApiService.Movies;
 using Movies.Client.Extensions.ServiceExtensions;
 using Movies.Client.Handlers;
-using System;
 
 namespace Movies.Client
 {
@@ -44,11 +42,12 @@ namespace Movies.Client
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Error/{0}");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
+
             app.UseStaticFiles();
 
             app.UseRouting();

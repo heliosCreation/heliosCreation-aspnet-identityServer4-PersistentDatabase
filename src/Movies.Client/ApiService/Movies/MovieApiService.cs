@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
+using Movies.Client.ApiService.Movies;
+using Movies.Client.Exceptions;
 using Movies.Client.Models;
 using System;
 using System.Collections.Generic;
@@ -89,7 +91,6 @@ namespace Movies.Client.ApiService
 
             var response = await client.SendAsync(
                 request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
-
             response.EnsureSuccessStatusCode();
             var stream = await response.Content.ReadAsStreamAsync();
             var movie = await JsonSerializer.DeserializeAsync<Movie>(stream, _options);

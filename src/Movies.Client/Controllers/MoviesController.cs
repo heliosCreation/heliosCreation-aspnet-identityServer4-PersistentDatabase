@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
-using Movies.Client.ApiService;
+using Movies.Client.ApiService.Movies;
 using Movies.Client.Models;
 using System;
 using System.Collections.Generic;
@@ -44,7 +44,9 @@ namespace Movies.Client.Controllers
         public async Task<IActionResult> Index()
         {
             await WriteOutIdentityInformation();
-            return View(await _movieApiService.GetMovies());
+            var movies = await _movieApiService.GetMovies();
+
+            return View(movies);
         }
 
         // GET: Movies/Details/5

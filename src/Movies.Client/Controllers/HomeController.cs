@@ -33,5 +33,20 @@ namespace Movies.Client.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        public IActionResult MyStatusCode(int code)
+        {
+            switch (code)
+            {
+                case 403:
+                    return RedirectToAction("AccessDenied", "Authorization");
+                case 401:
+                    return RedirectToAction("AccessDenied", "Authorization");
+                case 404:
+                    return RedirectToAction("AccessDenied", "Authorization");
+                default:
+                    return RedirectToAction("Error", "Home");
+            };
+        }
     }
 }
