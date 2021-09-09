@@ -41,14 +41,16 @@ namespace Movies.Client.Extensions.ServiceExtensions
 
                 opt.Scope.Add("address");
                 opt.Scope.Add("email");
+                opt.Scope.Add("country");
                 opt.Scope.Add("movieAPI");
-
-                opt.SaveTokens = true;
-                opt.GetClaimsFromUserInfoEndpoint = true;
 
                 //Some claims are filtered by the middleware pipeline. With this command, we remove the filter.
                 //opt.ClaimActions.Remove("nbf");
                 opt.ClaimActions.MapAllExcept("sid", "idp", "s_hash", "auth_time");
+                opt.ClaimActions.MapUniqueJsonKey("country", "country");
+
+                opt.SaveTokens = true;
+                opt.GetClaimsFromUserInfoEndpoint = true;
 
                 //Token should posesses those values
                 opt.TokenValidationParameters = new TokenValidationParameters

@@ -26,6 +26,8 @@ namespace Movies.Client
                  .AddJsonOptions(opts => opts.JsonSerializerOptions.PropertyNamingPolicy = null);
 
             services.AddAuthentificationService();
+            services.AddAuthorizationAndPolicies();
+
             services.AddTransient<BearerTokenHandler>();
             services.ProduceHttpClientFactory();
             services.AddHttpContextAccessor();

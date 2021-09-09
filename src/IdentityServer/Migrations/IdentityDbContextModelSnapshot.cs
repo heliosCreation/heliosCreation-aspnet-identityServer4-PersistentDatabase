@@ -75,7 +75,7 @@ namespace IdentityServer.Migrations
                         new
                         {
                             Id = new Guid("13229d33-99e0-41b3-b18d-4f72127e3971"),
-                            ConcurrencyStamp = "45916a5f-757b-46ae-8aee-958fde07783c",
+                            ConcurrencyStamp = "0aa9d598-d159-4cb8-ad6c-026a6ea4be41",
                             Email = "frank@someProvider.com",
                             IsActive = true,
                             Password = "AQAAAAEAACcQAAAAEKyU/alhPlQLX31AsXRuntxprzKvIbIJgIjeTS8YTumsUqRoPThoPS74LnHSBMjTVA==",
@@ -86,7 +86,7 @@ namespace IdentityServer.Migrations
                         new
                         {
                             Id = new Guid("c6e8040f-b2c0-4986-af6c-d3b650e0927e"),
-                            ConcurrencyStamp = "97d33c9e-2632-4870-aac7-c5776a0fc644",
+                            ConcurrencyStamp = "f0cbf832-c63f-4255-bdd0-5d5b8e84add0",
                             Email = "quentin@someprovider.com",
                             IsActive = true,
                             Password = "AQAAAAEAACcQAAAAEJnYqlDeDnLqIDR9u5TaqOdi87lAZQDTMprpuTcccPmPdp7+6t5EzqM3nqZEw5B2jQ==",
@@ -128,51 +128,67 @@ namespace IdentityServer.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("7dcc6ae3-34b3-4b43-a92b-8c920bb01922"),
-                            ConcurrencyStamp = "c4e6d43d-347e-4624-b36a-f8b7368e9c3c",
+                            Id = new Guid("46e955f9-fe58-461f-a2a3-d1e4f7a6a3aa"),
+                            ConcurrencyStamp = "c2d322fe-2098-4dcb-862c-f0dce4399700",
                             Type = "given_name",
                             UserId = new Guid("13229d33-99e0-41b3-b18d-4f72127e3971"),
                             Value = "Frank"
                         },
                         new
                         {
-                            Id = new Guid("05a6581e-b93b-4bd3-b214-22edb0a2c85a"),
-                            ConcurrencyStamp = "c8cd2fd7-8c57-432f-974f-eb8ef2356098",
+                            Id = new Guid("0629061e-3f3c-4b29-a674-a0f375ab2d97"),
+                            ConcurrencyStamp = "529a689e-2582-4bef-b3b2-9c272361739e",
                             Type = "family_name",
                             UserId = new Guid("13229d33-99e0-41b3-b18d-4f72127e3971"),
                             Value = "Underwood"
                         },
                         new
                         {
-                            Id = new Guid("283875bc-2800-48ba-90fe-b99b421fa8fa"),
-                            ConcurrencyStamp = "e5189b25-6dc9-4a54-b75d-6cbdb3a58690",
+                            Id = new Guid("8d9f04b3-1ddd-48d2-9527-4ae8c5ca0634"),
+                            ConcurrencyStamp = "aff15293-0a8b-4b57-b2a5-f312e55dde15",
                             Type = "country",
                             UserId = new Guid("13229d33-99e0-41b3-b18d-4f72127e3971"),
                             Value = "En"
                         },
                         new
                         {
-                            Id = new Guid("f659553c-f7f2-4829-a645-dc58f01a3601"),
-                            ConcurrencyStamp = "3ad4f561-5556-4142-89bd-e84857a48210",
+                            Id = new Guid("38a7afa0-f046-4546-adcc-68eec0f1dea3"),
+                            ConcurrencyStamp = "3090318e-1e8f-4f28-8cf8-3f29273eb10b",
+                            Type = "address",
+                            UserId = new Guid("13229d33-99e0-41b3-b18d-4f72127e3971"),
+                            Value = "12 hacker way"
+                        },
+                        new
+                        {
+                            Id = new Guid("7725582b-e7cc-4f36-943c-71dba8f1d4eb"),
+                            ConcurrencyStamp = "f4970a49-c1ef-4849-b46a-e2e82bd0f771",
                             Type = "given_name",
                             UserId = new Guid("c6e8040f-b2c0-4986-af6c-d3b650e0927e"),
                             Value = "Quentin"
                         },
                         new
                         {
-                            Id = new Guid("deaa654d-5ce5-447f-b88d-acd55644a730"),
-                            ConcurrencyStamp = "1dfb9dce-8103-407b-82a1-3816c8592ada",
+                            Id = new Guid("eb4d28f0-2179-4479-a2f9-03018a24e886"),
+                            ConcurrencyStamp = "2d31b16a-719c-4703-b5a3-c332cc08f14d",
                             Type = "family_name",
                             UserId = new Guid("c6e8040f-b2c0-4986-af6c-d3b650e0927e"),
                             Value = "Couissinier"
                         },
                         new
                         {
-                            Id = new Guid("540ba7a2-7519-43c3-aef3-8510c42a4ccd"),
-                            ConcurrencyStamp = "5d5b0a2d-0433-456a-be6c-06b4d61536aa",
+                            Id = new Guid("57d2af77-6083-4f99-beb1-bbfdfe36a01b"),
+                            ConcurrencyStamp = "561794cc-6b76-4e74-9295-d6e5abfc6d99",
                             Type = "country",
                             UserId = new Guid("c6e8040f-b2c0-4986-af6c-d3b650e0927e"),
                             Value = "Fr"
+                        },
+                        new
+                        {
+                            Id = new Guid("b372225f-d928-448b-bf4d-6a29e1a846dc"),
+                            ConcurrencyStamp = "91187d2e-975b-42e8-9d55-38fe192e72b8",
+                            Type = "address",
+                            UserId = new Guid("c6e8040f-b2c0-4986-af6c-d3b650e0927e"),
+                            Value = "13 hacker way"
                         });
                 });
 

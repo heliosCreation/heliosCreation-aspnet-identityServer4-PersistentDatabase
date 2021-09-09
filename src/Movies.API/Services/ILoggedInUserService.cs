@@ -9,5 +9,7 @@ namespace Movies.API.Services
     {
         string getName();
         string getUserSub();
+
+        string getAddress();
     }
 }

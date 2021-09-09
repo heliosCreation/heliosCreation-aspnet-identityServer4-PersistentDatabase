@@ -24,5 +24,12 @@ namespace Movies.API.Services
                 .Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?
                 .Value;
         }
+
+        public string getAddress()
+        {
+            return _user?
+                .Claims.FirstOrDefault(c => c.Type == "address")?
+                .Value;
+        }
     }
 }

@@ -3,10 +3,10 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Movies.Client.ApiService.Movies;
-using Movies.Client.Exceptions;
 using Movies.Client.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Text.Json;
@@ -87,7 +87,7 @@ namespace Movies.Client.ApiService
         {
             var client = _httpClientFactory.CreateClient("MovieAPIClient");
 
-            var request = new HttpRequestMessage (HttpMethod.Get, $"/movies/{id}");
+            var request = new HttpRequestMessage(HttpMethod.Get, $"/movies/{id}");
 
             var response = await client.SendAsync(
                 request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
@@ -138,5 +138,6 @@ namespace Movies.Client.ApiService
 
             response.EnsureSuccessStatusCode();
         }
+
     }
 }

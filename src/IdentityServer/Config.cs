@@ -39,7 +39,7 @@ namespace IdentityServer
                            IdentityServerConstants.StandardScopes.Address,
                            IdentityServerConstants.StandardScopes.Email,
                            "movieAPI",
-                           "country"
+                           "country",
                        }
                    }
             };
@@ -64,7 +64,9 @@ namespace IdentityServer
               new IdentityResources.Profile(),
               new IdentityResources.Address(),
               new IdentityResources.Email(),
-              new IdentityResource("country","Your country", new List<string>() { "country" })
-          };
+                new IdentityResource(
+                    "country",
+                    "The country you're living in",
+                    new List<string>() { "country" }),          };
     }
 }

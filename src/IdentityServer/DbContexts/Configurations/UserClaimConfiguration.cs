@@ -41,6 +41,13 @@ namespace IdentityServer.DbContexts.Configurations
                     Type = "country",
                     Value = "En"
                 },
+                new UserClaim()
+                {
+                    Id = Guid.NewGuid(),
+                    UserId = new Guid("13229d33-99e0-41b3-b18d-4f72127e3971"),
+                    Type = JwtClaimTypes.Address,
+                    Value = "12 hacker way"
+                },
 
                 //Quentin's Claims
                 new UserClaim()
@@ -63,6 +70,13 @@ namespace IdentityServer.DbContexts.Configurations
                     UserId = new Guid("c6e8040f-b2c0-4986-af6c-d3b650e0927e"),
                     Type = "country",
                     Value = "Fr"
+                },
+                new UserClaim()
+                {
+                    Id = Guid.NewGuid(),
+                    UserId = new Guid("c6e8040f-b2c0-4986-af6c-d3b650e0927e"),
+                    Type = JwtClaimTypes.Address,
+                    Value = "13 hacker way"
                 },
             };
         }

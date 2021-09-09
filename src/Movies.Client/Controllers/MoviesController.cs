@@ -7,6 +7,7 @@ using Movies.Client.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Movies.Client.Controllers
@@ -98,9 +99,7 @@ namespace Movies.Client.Controllers
             return View(movie);
         }
 
-        // POST: Movies/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, Movie movie)
@@ -118,7 +117,6 @@ namespace Movies.Client.Controllers
             return View(movie);
         }
 
-        // GET: Movies/Delete/5
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null)
@@ -130,7 +128,6 @@ namespace Movies.Client.Controllers
             return View(movie);
         }
 
-        // POST: Movies/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
@@ -139,6 +136,13 @@ namespace Movies.Client.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [HttpGet]
+        [Authorize(Policy = "CanOrderMovie")]
+        public IActionResult OrderMovie()
+        {
+            var address = HttpContext.User?.Claims.FirstOrDefault(c => c.Type == "address")?.Value;
+            return View(new OrderMovie(address));
+        }
 
         public async Task WriteOutIdentityInformation()
         {

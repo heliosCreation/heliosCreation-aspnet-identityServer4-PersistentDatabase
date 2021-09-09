@@ -35,7 +35,6 @@ namespace Movies.API.Controllers
 
         // GET: api/Movies/5
         [HttpGet("{id}")]
-        [Authorize(Policy = "MustBePayingUser")]
         public async Task<ActionResult<MovieModel>> GetMovie(Guid id)
         {
 
@@ -51,7 +50,6 @@ namespace Movies.API.Controllers
         }
 
         [HttpPost]
-        //[Authorize(Policy = "MustBePayingUser")]
         public async Task<ActionResult<MovieModel>> PostMovie(MovieCreationModel movie)
         {
             var movieForRepo = _mapper.Map<Movie>(movie);

@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -39,6 +42,12 @@
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Movies" asp-action="AdminOnly">Admin Operation</a>
+                            </li>
+                        }
+                        @if ((await AuthorizationService.AuthorizeAsync(User, "CanOrderMovie")).Succeeded)
+                        {
+                            <li>
+                                <a class="nav-link text-dark"asp-area="" asp-controller="Movies" asp-action="OrderMovie">Order movie</a>
                             </li>
                         }
                     </ul>

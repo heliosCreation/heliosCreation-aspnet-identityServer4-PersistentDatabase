@@ -85,8 +85,8 @@ namespace IdentityServer.Services
             {
                 throw new ArgumentNullException(nameof(subject));
             }
-
-            return await _context.UserClaims.Where(u => u.User.Subject == subject).ToListAsync();
+            var claims = await _context.UserClaims.Where(u => u.User.Subject == subject).ToListAsync();
+            return claims;
         }
 
         public async Task<User> GetUserBySubjectAsync(string subject)
